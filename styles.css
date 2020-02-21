@@ -1,0 +1,47 @@
+#login_info{
+    border: 2px #333 dashed;
+}
+
+div{
+    background-color: aliceblue;
+    text-align: center;
+}
+
+#login_bienvenida{
+    font-family: Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width: 100%;
+}
+.login_data{
+    font-size: 25px;
+    width: 90%;
+    position: relative;
+    left: 5%;
+}
+#button{
+    width: 20%;  
+    position: relative; 
+    left: 40%;
+}
+form{
+    margin: 10px;
+    background-color: #ccc;
+    padding: 5px;
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="password"]{
+    display: block;
+    padding: 5px;
+    border-radius: 2px;
+    border: 2px #333 solid;
+    width: 90%;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
