@@ -1,67 +1,72 @@
 function guardarDatos(){
-    //Leer los valores del nombre y la edad 
     var nombre = document.getElementById('nombre').value
-    var edad = document.getElementById('edad').value
     var pass = document.getElementById('pass').value
-    //mostrar alerta si el nombre esta vacio
-    if(nombre == undefined || nombre == "" || nombre == null){
-        alert('El nombre es requerido')
-        return 
+    var edad = document.getElementById('edad').value
+    if(nombre =="" || nombre==null || nombre ==undefined){
+        alert("El nombre no puede estar vacio")
+        return
     }
-    //alert('estoy afuera del if')
+    if(nombre =="" || nombre==null || nombre ==undefined){
+        alert("debe ingresar una contraseña")
+        return
+    }
+    if(edad == undefined || edad <= 0){
+        alert("La edad no puede estar vacio")
+        return
+    }
 
-    //mostrar alerta si la edad esta vacia o es 0 o menor
-    if(edad == undefined || edad<1){
-        alert('La edad es requerida')
-        return 
-    }
-
-    if(pass == undefined || pass == "" || pass == null){
-        alert('La pass es requerido')
-        return 
-    }
-    //guardar el nombre
     guardarUsuario(nombre, pass)
-    //leer el nombre guardado
-    var nombre_usuario = obtenerNombre()
-    //basado en la edad crear un mensaje de bienvenida
+    var nombre_guardado = obtenerNombre()
+    var nombre_login = document.getElementById('login_nombre')
+    nombre_login.innerHTML = `hola ${nombre_guardado}`
+    nombre_login.classList.add('login_data')
+
+    var edad_login = document.getElementById('login_edad')
+    edad_login.classList.add('login_data')
+
+
     var saludo = calcularSaludo(edad)
+    
+    edad_login.innerHTML = saludo
 
-    document.getElementById('login_nombre').innerHTML = `Hola ${nombre_usuario}`
-
-    document.getElementById('login_edad').innerHTML = saludo
-
-    //mostrar los mensajes y cambiarles los estilos
     return false;
 }
 
 function guardarUsuario(nombre, pass){
-    //simular el guardado de nombre usando el local storage
-    localStorage.setItem('nombre', nombre)
-    localStorage.setItem('pass', pass)
-
+    localStorage.setItem('nombre',nombre)
+    localStorage.setItem('pass',pass)
 }
 function obtenerNombre(){
     return localStorage.getItem('nombre')
 }
 function calcularSaludo(edad){
-    //cambiar el saludo si la edad es menor a 18
-    var saludo ;
+    var saludo;
     if(edad < 18){
-        saludo = 'bienvenido joven'
+        saludo = 'es un gusto saludarle joven'
     }else{
-        saludo = 'bienvenido senior'
+        saludo = 'es un gusto saludarle se&#241or'
     }
-    saludo += "<br> su codigo es: "+Math.floor(Math.random()*1000)
+
+    saludo +=' <br> su token de session es '+ Math.floor(Math.random()*10000) 
 
     return saludo
 }
 function resetearPagina(){
-    //borrar el nombre del local storage y refrescar la pagina
+    localStorage.removeItem('nombre')
+    localStorage.removeItem('pass')
+    location.reload()
 }
 function imprimirPagina(){
-    //ocultar el formulario, luego llamar a imprimir pantalla, y finalmente mostrar el formulario otra vez
+    document.getElementById('login_form').style.display = 'none'
+    window.print()
+    document.getElementById('login_form').style.display = 'block'
 }
-function mostrarPassword(){
-    //cambiar el tipo de input del campo password
-}
+
+function mostrarPassword() {
+    var pass = document.getElementById("pass");
+    if (pass.type === "password") {
+        pass.type = "text";
+    } else {
+        pass.type = "password";
+    }
+  }
